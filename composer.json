@@ -1,0 +1,12 @@
+{
+    "name": "vansales/qr-payment",
+    "description": "PHP Library to generate QR Code for PromptPay and SCB Payment",
+    "keywords": [
+        "Promptpay", "SCB", "QR-Payment"
+    ],
+    "license": "MIT",
+    "require": {
+        "bref/bref": "^0.5.32",
+        "endroid/qr-code": "^3.9"
+    }
+}

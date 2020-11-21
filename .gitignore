@@ -1,0 +1,4 @@
+.serverless
+vendor
+composer.lock
+serverless.yml
