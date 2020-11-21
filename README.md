@@ -3,14 +3,14 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/vansales/qr-payment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/vansales/qr-payment)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-PHP Library to generate QR Code payment for PromptPay & SCB
+PHP Library to generate QR Code for PromptPay and SCB Payment
 
 ## Requirement
 - PHP 7+
 - [GD Extension](http://php.net/manual/en/book.image.php) (For Generate QR Code)
 
 ## Composer
-This package available on [Packagist](https://packagist.org/packages/kittinan/php-promptpay-qr), Install the latest version with composer 
+This package available on [Packagist](https://packagist.org/packages/vansales/qr-payment), Install the latest version with composer 
 
 ```
 composer require vansales/qr-payment
