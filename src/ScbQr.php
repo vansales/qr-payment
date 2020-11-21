@@ -1,20 +1,23 @@
-<?php 
+<?php
+
 namespace vansales;
 
-require_once './vendor/autoload.php'; 
+require_once './vendor/autoload.php';
+
 use Endroid\QrCode\QrCode;
 
 
-class ScbQr{
+class ScbQr
+{
 
     const RELEASE_VERSION_OF_QR = '000201';
     const INITIAL_METHOD_OF_QR = '010212';
     const SCB_PAYMENT_CODE = '0016A000000677010112';
-    const SCB_REFERENCE_CODE = '0706SCB001'; 
+    const SCB_REFERENCE_CODE = '0706SCB001';
     const TRANSACTION_CURRENCY_THB = '5303764';
     const COUNTRY_CODE_TH = '5802TH';
     const CHECKSUM_PREFIX = '6304';
-    
+
     public function getqrcode($amount = 0, $ref_1 = 'none', $ref_2 = 'none', $billerId = '')
     {
 
@@ -55,23 +58,26 @@ class ScbQr{
         echo $qrCode->writeString();
     }
 
-    private function f($prefix, $data) {
+    private function f($prefix, $data)
+    {
         return $prefix . sprintf("%02d", strlen($data)) . $data;
     }
 
-    private function formatAmount($amount) {
+    private function formatAmount($amount)
+    {
         return number_format($amount, 2, '.', '');
     }
 
-    private function crc16($data) {
-		$crc = 0xFFFF;
-		for ($i = 0; $i < strlen($data); $i++) {
-			$x = (($crc >> 8) ^ ord($data[$i])) & 0xFF;
-			$x ^= $x >> 4;
-			$crc = (($crc << 8) ^ ($x << 12) ^ ($x << 5) ^ $x) & 0xFFFF;
-		}
-		return $crc;
-	}
+    private function crc16($data)
+    {
+        $crc = 0xFFFF;
+        for ($i = 0; $i < strlen($data); $i++) {
+            $x = (($crc >> 8) ^ ord($data[$i])) & 0xFF;
+            $x ^= $x >> 4;
+            $crc = (($crc << 8) ^ ($x << 12) ^ ($x << 5) ^ $x) & 0xFFFF;
+        }
+        return $crc;
+    }
 
     /*
     * Returns CRC16 of a string as hexadecimal string 
