@@ -1,6 +1,6 @@
 <?php 
 require_once './src/ScbQr.php';
-$scb = new Vansales\ScbQr();
+$scb = new vansales\ScbQr();
 
 // Grab parameter from URI
 // ?amount=99.25&ref_1=CUST1100&ref_2=INV1001&billerId=0115311040039475101

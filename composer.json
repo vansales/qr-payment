@@ -2,11 +2,23 @@
     "name": "vansales/qr-payment",
     "description": "PHP Library to generate QR Code for PromptPay and SCB Payment",
     "keywords": [
-        "Promptpay", "SCB", "QR-Payment"
+        "Promptpay",
+        "SCB",
+        "QR-Payment"
     ],
     "license": "MIT",
     "require": {
         "bref/bref": "^0.5.32",
         "endroid/qr-code": "^3.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8.12",
+        "phpunit/php-timer": "^1.0.9",
+        "satooshi/php-coveralls": "v1.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "vansales\\": "src"
+        }
     }
 }

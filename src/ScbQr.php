@@ -1,5 +1,5 @@
 <?php 
-namespace Vansales;
+namespace vansales;
 
 require_once './vendor/autoload.php'; 
 use Endroid\QrCode\QrCode;

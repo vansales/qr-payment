@@ -1,6 +1,6 @@
 <?php 
 require_once './src/PromptPay.php';
-$promptpay = new Vansales\PromptPay();
+$promptpay = new vansales\PromptPay();
 
 // Grab parameter from URI
 // ?amount=99.25&targer=0826269966
