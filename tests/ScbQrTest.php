@@ -17,12 +17,12 @@ class ScbQrTest extends PHPUnit_Framework_TestCase {
   public function testformatAmount() {
 
     $amount = 90.2511;
-    $result = $this->PromptPay->formatAmount($amount);
+    $result = $this->ScbQr->formatAmount($amount);
     $expected = '90.25';
     $this->assertEquals($expected, $result);
 
     $amount = 90.2561;
-    $result = $this->PromptPay->formatAmount($amount);
+    $result = $this->ScbQr->formatAmount($amount);
     $expected = '90.26';
     $this->assertEquals($expected, $result);
   }

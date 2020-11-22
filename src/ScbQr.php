@@ -63,7 +63,7 @@ class ScbQr
         return $prefix . sprintf("%02d", strlen($data)) . $data;
     }
 
-    private function formatAmount($amount)
+    public function formatAmount($amount)
     {
         return number_format($amount, 2, '.', '');
     }
