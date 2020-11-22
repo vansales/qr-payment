@@ -14,4 +14,17 @@ class PromptPayTest extends PHPUnit_Framework_TestCase {
     $this->PromptPay = new vansales\PromptPay();
   }
 
+  public function testformatAmount() {
+
+    $amount = 90.2511;
+    $result = $this->PromptPay->formatAmount($amount);
+    $expected = '90.25';
+    $this->assertEquals($expected, $result);
+
+    $amount = 90.2561;
+    $result = $this->PromptPay->formatAmount($amount);
+    $expected = '90.26';
+    $this->assertEquals($expected, $result);
+  }
+
 }
