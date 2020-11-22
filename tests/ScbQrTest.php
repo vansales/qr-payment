@@ -31,9 +31,11 @@ class ScbQrTest extends PHPUnit_Framework_TestCase {
 
     // https://www.lammertbies.nl/comm/info/crc-calculation
     $data = '00020101021230570016A00000067701011201153110400394751010206REF0010304REF253037645406555.555802TH62100706SCB0016304';
-    $result = $this->ScbQr->crc16($data);
+    $crc16 = $this->PromptPay->crc16($data);
+    $result = $this->PromptPay->CRC16HexDigest($crc16);
     $expected = '37C6';
     $this->assertEquals($expected, $result);
   }
 
 }
+

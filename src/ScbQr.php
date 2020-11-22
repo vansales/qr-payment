@@ -82,7 +82,7 @@ class ScbQr
     /*
     * Returns CRC16 of a string as hexadecimal string 
     */
-    private function CRC16HexDigest($str)
+    public function CRC16HexDigest($str)
     {
         return sprintf('%04X', $this->crc16($str));
     }
