@@ -1,10 +1,10 @@
 # vansales/qr-payment
 [![Build Status](https://travis-ci.org/vansales/qr-payment.svg?branch=master)](https://travis-ci.org/vansales/qr-payment)
 [![Build Status](https://scrutinizer-ci.com/g/vansales/qr-payment/badges/build.png?b=master)](https://scrutinizer-ci.com/g/vansales/qr-payment/build-status/master)
-[![Build Status](https://scrutinizer-ci.com/g/vansales/qr-payment/badges/build.png?b=master)](https://scrutinizer-ci.com/g/vansales/qr-payment/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/vansales/qr-payment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/vansales/qr-payment/?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-PHP Library to generate QR Code for PromptPay and SCB Payment
+PHP Library to generate QR Code for QR-Payment and PromptPay
 
 ## Requirement
 - PHP 7.2+
@@ -32,7 +32,7 @@ $target = $_GET['target'] ?? '0823456789';
 $promptpay->generateQrCode($target, $amount);
 
 
-# To generate SCB Payment QR Code
+# To generate SCB QR-Payment
 $scb = new vansales\ScbQr();
 
 // Grab parameter from URI
