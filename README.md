@@ -7,7 +7,7 @@
 PHP Library to generate QR Code for QR-Payment and PromptPay
 
 ## Requirement
-- PHP 7.2+
+- PHP 5.4+
 - [GD Extension](http://php.net/manual/en/book.image.php) (For Generate QR Code)
 
 ## Composer

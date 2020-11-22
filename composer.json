@@ -6,6 +6,7 @@
     ],
     "license": "MIT",
     "require": { 
+        "php": ">=5.4",
         "endroid/qr-code": "^3.9"
     },
     "require-dev": {
