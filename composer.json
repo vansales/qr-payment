@@ -5,15 +5,11 @@
         "QR-Payment", "Promptpay"
     ],
     "license": "MIT",
-    "require": {
-        "php": ">=7.2",
-        "bref/bref": "^0.5.32",
+    "require": { 
         "endroid/qr-code": "^3.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.12",
-        "phpunit/php-timer": "1.0.9",
-        "satooshi/php-coveralls": "v1.0.1"
+        "phpunit/phpunit": "^4.8.12"
     },
     "autoload": {
         "psr-4": {
