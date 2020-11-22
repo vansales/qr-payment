@@ -47,9 +47,9 @@ class PromptPayTest extends PHPUnit_Framework_TestCase {
     $expected = '90.25';
     $this->assertEquals($expected, $result);
 
-    $amount = 90.2561;
-    $result = $this->PromptPay->formatAmount($amount);
-    $expected = '90.26';
+    $amount = 555.555;
+    $result = $this->ScbQr->formatAmount($amount);
+    $expected = '555.56';
     $this->assertEquals($expected, $result);
   }
 
