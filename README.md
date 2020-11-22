@@ -58,4 +58,4 @@ $scb->getqrcode($amount, $ref_1, $ref_2, $billerId);
 Feel free to contribute on this project, We'll be happy to work with you.
 
 ## License
-The MIT License (MIT)
+This bundle is under the MIT license. For the full copyright and license information please view the LICENSE file that was distributed with this source code.
