@@ -2,15 +2,17 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/PromptPay.php';
+use PHPUnit\Framework\TestCase;
 
 /**
  * @property vansales\PromptPay PromptPay
  */
-class PromptPayTest extends PHPUnit_Framework_TestCase {
+class PromptPayTest extends TestCase {
 
   private $PromptPay;
 
   public function __construct() {
+    parent::__construct();
     $this->PromptPay = new vansales\PromptPay();
   }
 
@@ -48,18 +50,22 @@ class PromptPayTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($expected, $result);
 
     $amount = 555.555;
-    $result = $this->ScbQr->formatAmount($amount);
+    $result = $this->PromptPay->formatAmount($amount);
     $expected = '555.56';
     $this->assertEquals($expected, $result);
   }
 
   public function testCrc16() {
+    
+    $data = '00020101021230570016A00000067701011201153110400394751010206REF0010304REF253037645406555.565802TH62100706SCB0016304';
+    $result = $this->PromptPay->crc16($data);
+    $expected = '63770';
+    $this->assertEquals($expected, $result);
 
     // https://www.lammertbies.nl/comm/info/crc-calculation
-    $data = '00020101021230570016A00000067701011201153110400394751010206REF0010304REF253037645406555.555802TH62100706SCB0016304';
-    $crc16 = $this->PromptPay->crc16($data);
-    $result = $this->PromptPay->CRC16HexDigest($crc16);
-    $expected = '37C6';
+    $data = '00020101021230570016A00000067701011201153110400394751010206REF0010304REF253037645406555.565802TH62100706SCB0016304';
+    $result = $this->PromptPay->CRC16HexDigest($data);
+    $expected = 'F91A';
     $this->assertEquals($expected, $result);
   }
 

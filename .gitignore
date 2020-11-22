@@ -2,3 +2,4 @@
 vendor
 composer.lock
 serverless.yml
+.phpunit.result.cache
