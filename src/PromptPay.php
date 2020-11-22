@@ -95,7 +95,7 @@ class PromptPay
     return number_format($amount, 2, '.', '');
   }
 
-  private function crc16($data)
+  public function crc16($data)
   {
     $crc = 0xFFFF;
     for ($i = 0; $i < strlen($data); $i++) {
@@ -109,7 +109,7 @@ class PromptPay
   /*
   * Returns CRC16 of a string as hexadecimal string 
   */
-  private function CRC16HexDigest($str)
+  public function CRC16HexDigest($str)
   {
     return sprintf('%04X', $this->crc16($str));
   }

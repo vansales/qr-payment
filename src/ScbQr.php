@@ -68,7 +68,7 @@ class ScbQr
         return number_format($amount, 2, '.', '');
     }
 
-    private function crc16($data)
+    public function crc16($data)
     {
         $crc = 0xFFFF;
         for ($i = 0; $i < strlen($data); $i++) {
