@@ -9,9 +9,11 @@ $amount = $_GET['amount'] ?? 0;
 $ref_1 = $_GET['ref_1'] ?? 'none';
 $ref_2 = $_GET['ref_2'] ?? 'none';
 
+$rawdata = $_GET['rawdata'] ?? false;
+
 # '0115311040039475101'; // Biller ID TEST1
 $billerId = $_GET['billerId'] ?? '0115311040039475101'; 
 
 // Display qrcode as PNG image
-$scb->getqrcode($amount, $ref_1, $ref_2, $billerId);
+$scb->getqrcode($amount, $ref_1, $ref_2, $billerId, $rawdata);
 

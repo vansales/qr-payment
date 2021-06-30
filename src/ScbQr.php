@@ -13,12 +13,12 @@ class ScbQr
     const RELEASE_VERSION_OF_QR = '000201';
     const INITIAL_METHOD_OF_QR = '010212';
     const SCB_PAYMENT_CODE = '0016A000000677010112';
-    const SCB_REFERENCE_CODE = '0706SCB001';
+    const SCB_REFERENCE_CODE = '0700'; //'0706SCB001';
     const TRANSACTION_CURRENCY_THB = '5303764';
     const COUNTRY_CODE_TH = '5802TH';
     const CHECKSUM_PREFIX = '6304';
 
-    public function getqrcode($amount = 0, $ref_1 = 'none', $ref_2 = 'none', $billerId = '')
+    public function getqrcode($amount = 0, $ref_1 = 'none', $ref_2 = 'none', $billerId = '', $rawdata = false)
     {
 
         $command = '';
@@ -51,6 +51,11 @@ class ScbQr
         # CRC16 checksum
         $command .= self::CHECKSUM_PREFIX;
         $command .= $this->CRC16HexDigest($command);
+
+        if($rawdata == true){
+            header('Content-Type: text/html;');
+            echo $command; exit;   
+        }
 
         $qrCode = new QrCode($command);
 
