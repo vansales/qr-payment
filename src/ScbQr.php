@@ -18,9 +18,8 @@ class ScbQr
     const COUNTRY_CODE_TH = '5802TH';
     const CHECKSUM_PREFIX = '6304';
 
-    public function getqrcode($amount = 0, $ref_1 = 'none', $ref_2 = 'none', $billerId = '', $rawdata = false)
+    public function getqrcode($amount = 0, $ref_1 = 'none', $ref_2 = 'none', $billerId = '', $rawdata = 'no')
     {
-
         $command = '';
 
         # Release version of QR
@@ -52,15 +51,15 @@ class ScbQr
         $command .= self::CHECKSUM_PREFIX;
         $command .= $this->CRC16HexDigest($command);
 
-        if($rawdata == true){
+        if ($rawdata == 'yes') {
             header('Content-Type: text/html;');
-            echo $command; exit;   
+            echo $command;
+        } else {
+            $qrCode = new QrCode($command);
+
+            header('Content-Type: ' . $qrCode->getContentType());
+            echo $qrCode->writeString();
         }
-
-        $qrCode = new QrCode($command);
-
-        header('Content-Type: ' . $qrCode->getContentType());
-        echo $qrCode->writeString();
     }
 
     private function f($prefix, $data)
