@@ -124,4 +124,81 @@ class PromptPay
     header('Content-Type: ' . $qrCode->getContentType());
     echo $qrCode->writeString();
   }
+
+  /**
+   * True when $target is a full EMV QR payload (a merchant Bill Payment QR
+   * that the company stored verbatim), not a proxy number (phone / ID card).
+   * Proxy targets are short and digits-only, so they never start with "000201".
+   */
+  public function isMerchantPayload($target)
+  {
+    $target = (string) $target;
+    return strlen($target) >= 30 && strpos($target, '000201') === 0;
+  }
+
+  /**
+   * Parse an EMV QR string into a flat list of [id, value] top-level tags.
+   */
+  public function parseTlv($payload)
+  {
+    $out = [];
+    $i = 0;
+    $n = strlen($payload);
+    while ($i + 4 <= $n) {
+      $id  = substr($payload, $i, 2);
+      $len = (int) substr($payload, $i + 2, 2);
+      $val = substr($payload, $i + 4, $len);
+      if (strlen($val) < $len) {
+        break; // malformed / truncated — stop
+      }
+      $out[] = [$id, $val];
+      $i += 4 + $len;
+    }
+    return $out;
+  }
+
+  /**
+   * Re-inject an amount into a merchant Bill Payment payload WITHOUT touching
+   * the merchant account block (Tag 30 = biller id + ref1 + ref2). We only:
+   *   - flip POI (Tag 01) 11 (static) -> 12 (dynamic) when an amount is given
+   *   - insert/replace Tag 54 (amount) right after Tag 53 (currency)
+   *   - recompute the CRC (Tag 63)
+   * Every other tag is preserved byte-for-byte so the bank routing is identical.
+   */
+  public function generateMerchantPayload($payload, $amount = null)
+  {
+    $data = [];
+    foreach ($this->parseTlv($payload) as $field) {
+      list($id, $val) = $field;
+
+      if ($id === self::ID_CRC) {
+        continue; // drop old CRC, recomputed below
+      }
+      if ($id === self::ID_TRANSACTION_AMOUNT) {
+        continue; // drop any existing amount, re-injected after currency
+      }
+      if ($id === self::ID_POI_METHOD) {
+        $val = $amount ? self::POI_METHOD_DYNAMIC : self::POI_METHOD_STATIC;
+      }
+
+      $data[] = $this->f($id, $val);
+
+      if ($id === self::ID_TRANSACTION_CURRENCY && $amount !== null) {
+        $data[] = $this->f(self::ID_TRANSACTION_AMOUNT, $this->formatAmount($amount));
+      }
+    }
+
+    $dataToCrc = $this->serialize($data) . self::ID_CRC . '04';
+    $data[]    = $this->f(self::ID_CRC, $this->CRC16HexDigest($dataToCrc));
+    return $this->serialize($data);
+  }
+
+  public function generateMerchantQrCode($payload, $amount = 0)
+  {
+    $newPayload = $this->generateMerchantPayload($payload, $amount);
+
+    $qrCode = new QrCode($newPayload);
+    header('Content-Type: ' . $qrCode->getContentType());
+    echo $qrCode->writeString();
+  }
 }
